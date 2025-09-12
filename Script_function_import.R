@@ -33,6 +33,7 @@ troncon_hydro_layer <- "BDTOPO_V3:troncon_hydrographique"
 #test d'une bdcarto-------------------------------------------------------------
 carto_bassin_v <- "BDCARTO_V5:bassin_versant_topographique"
 
+#insertion des couches enjeux eau sur la couche vecteur de la zone :
 cours_eau <- get_wfs(corcieux_casdastre, cours_eau_layer, spatial_filter = "INTERSECTS")
 bassin_v<- get_wfs(corcieux_casdastre, bassin_v_layer, spatial_filter = "INTERSECTS")
 detail_hydro<- get_wfs(corcieux_casdastre, detail_hydro_layer, spatial_filter = "INTERSECTS")
@@ -41,9 +42,7 @@ plan_eau<- get_wfs(corcieux_casdastre, plan_eau_layer, spatial_filter = "INTERSE
 surf_hydro<- get_wfs(corcieux_casdastre, surf_hydro_layer, spatial_filter = "INTERSECTS")
 troncon_hydro<- get_wfs(corcieux_casdastre, troncon_hydro_layer, spatial_filter = "INTERSECTS")
 
-
-
-
+#Création de la carte avec les différentes paramètres :
 map <- tm_shape(matrice) +
   tm_borders(lwd = 5, col = "black") +
   tm_fill(col = "nom_com", palette = "Set3") +
@@ -61,3 +60,15 @@ map <- tm_shape(matrice) +
   tm_fill("blue")
 
 map
+
+#Export de la carte au format PDF ou PNG :
+
+
+
+#export des couches en shp ou geopackage :
+base <- "C:/Users/230117/Downloads/cours_racine"
+export <- file.path(base, "export", "psg.gpkg")
+st_write(matrice, export, layer = "matrice")
+st_write(matrice_route, export, layer = "matrice_route", append = TRUE)
+st_write(matrice_tronçon, export, layer = "matrice_tronçon", append = TRUE)
+st_write(matrice_etang, export, layer = "matrice_etang", append = TRUE)
