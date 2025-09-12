@@ -15,6 +15,7 @@ library(tmap)
 
 couches_vecteur <- get_layers_metadata("wfs")
 couches_raster <- get_layers_metadata("wms-r")
+IGNF_HYDROGRAPHY.HYDROGRAPHY
 
 corcieux_casdastre <- get_apicarto_cadastre(88115)
 
